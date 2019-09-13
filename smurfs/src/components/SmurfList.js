@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 
 import { connect } from 'react-redux';
 import { getSmurfs } from '../actions/index';
 
 const SmurfList = props => {
 
-    return (
-        <p>hello</p>
-        // smurfs.map(smurf => {
-        //     return <li >{smurf.name}</li>
-        // })
+    const Smurfs = ({ getSmurfs, smurf, isFetching, error }) => {
+        useEffect(() => {
+            // run action creator when the component mounts
+            getSmurfs();
+        }, [getSmurfs]);
 
+        if (isFetching) {
+            return <h2>Fetching smurf for ya!</h2>;
+        }
 
-        // < li >
+        return (
+            <>
+                <h2>Papa Smurfs called : {smurf}</h2>
+                <button onClick={getSmurfs}>Get new Smurf</button>
+            </>
+        );
+    };
 
-        // {/* <button className="button" onClick={() => props.getSmurf(props.add)}>Add</button> */}
-
-        // </li >
-    );
-};
-
-
-
-
-export default connect(null, { getSmurfs })(SmurfList);
+    const mapStateToProps = state => {
+        return {
+            smurf: state.smurf,
+            isFetching: state.isFetching,
+            error: state.error
+        };
+    };
+}
+export default connect(mapStateToProps, { getSmurfs })(SmurfList)
