@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { connect } from 'redux';
-import { getSmurf } from '../actions/index;'
+import { connect } from 'react-redux';
+import { addNewSmurf } from '../actions/index;'
 
-export const SmurfForm = props => {
+const SmurfForm = props => {
 
-    return (
-        <div>
-            addNewSmurf = e => {
-                e.preventDefault()
+    return
+    <div>
+        addNewSmurf= e => {
+            e.preventDefault()
 
 
 
-            };
+        };
          const handleChanges = e => {
-                addNewSmurf(e.target.value)
-            };
+            addNewSmurf(e.target.value)
+        };
          <input
-                type="text"
-                value={props.smurf.name}
-                onChange={props.handleChanges}
-                placeholder="Add new smurf"
-            />
-            <button onClick={props.getSmurf}>Add Smurf</button>
+            type="text"
+            value={props.smurf.name}
+            onChange={props.handleChanges}
+            placeholder="Add new smurf"
+        />
+        <button onClick={props.addNewSmurf}>Add Smurf</button>
 
-            );
-        </div>
-    )
 
+    </div>
+}
+export default connect(null, { addNewSmurf })(SmurfForm);
