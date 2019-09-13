@@ -1,22 +1,26 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { getSmurf } from '../actions/index';
+import { getSmurfs } from '../actions/index';
 
-const addNewSmurf = props => {
+const SmurfList = props => {
 
     return (
+        <p>hello</p>
+        // smurfs.map(smurf => {
+        //     return <li >{smurf.name}</li>
+        // })
 
 
-        <li>
+        // < li >
 
-            <button className="button" onClick={() => props.addNewSmurf(props.add)}>Add</button>
-            {props.smurf.name}
-        </li>
+        // {/* <button className="button" onClick={() => props.getSmurf(props.add)}>Add</button> */}
+
+        // </li >
     );
 };
 
 
 
 
-export default connect(null, { getSmurf })(SmurfList);
+export default connect(null, { getSmurfs })(SmurfList);
