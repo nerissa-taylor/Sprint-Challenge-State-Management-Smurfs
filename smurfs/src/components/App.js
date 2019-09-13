@@ -4,6 +4,7 @@ import { reducer } from '../reducer/reducer';
 import "./App.css";
 import SmurfForm from './SmurfForm';
 import SmurfList from './SmurfList';
+
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
       <div>Start inside of your `src/index.js` file!</div>
       <div>Have fun!</div>
       <SmurfForm />
+      <SmurfList />
     </div>
   );
 }
