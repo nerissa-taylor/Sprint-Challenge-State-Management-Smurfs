@@ -4,7 +4,7 @@ import { getSmurfs } from '../actions/index';
 
 
 
-const SmurfList = ({ getSmurfs, smurf, isFetching, error }) => {
+const SmurfList = ({ getSmurfs, smurfs, isFetching, error }) => {
     useEffect(() => {
         // run action creator when the component mounts
         getSmurfs();
@@ -16,16 +16,25 @@ const SmurfList = ({ getSmurfs, smurf, isFetching, error }) => {
 
     return (
         <div>
-            <h2>Papa Smurfs called : {getSmurfs}</h2>
-            <button onClick={getSmurfs}>Get new Smurf</button>
+            <h2>Papa Smurfs called </h2>
+            {smurfs.map(smurf => (
+                <div key={smurf.id}>
+                    <p>Name: {smurf.name}</p>
+                    <p>Age:{smurf.age}</p>
+                    <p>Height: {smurf.height}</p>
+
+                </div>
+            ))}
         </div>
     );
 };
 const mapStateToProps = state => {
+    console.log('state', state)
     return {
-        name: state.quote,
+        smurfs: [...state.smurfs],
         isFetching: state.isFetching,
         error: state.error
+
     };
 };
 

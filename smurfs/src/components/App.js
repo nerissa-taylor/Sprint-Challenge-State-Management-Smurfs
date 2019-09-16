@@ -4,7 +4,6 @@ import { reducer } from '../reducer/reducer';
 import "./App.css";
 import SmurfForm from './SmurfForm';
 import SmurfList from './SmurfList';
-
 function App() {
 
   return (

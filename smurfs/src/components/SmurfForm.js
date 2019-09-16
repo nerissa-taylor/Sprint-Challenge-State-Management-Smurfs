@@ -1,49 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { addNewSmurf, FETCHING_SMURFS_FAILURE } from '../actions/';
+import { addNewSmurf } from '../actions/';
 
-const SmurfForm = props => {
-    const [updateSmurf, setUpdateSmurf] = useState('');
-    const [isFetching, setIsFetching] = useState(false);
-
-    const updateSmurfs = event => {
-        event.preventDefault();
-        setUpdateSmurf([...updateSmurfs, updateSmurf])
+class SmurfForm extends React.Component {
+    state = {
+        name: '',
+        age: 0,
+        height: ''
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
-    const handleChanges = event => {
-        setUpdateSmurf(event.target.value);
+    updateSmurf = () => {
+        const { name, age, height } = this.state
+        this.props.addNewSmurf({ name, age: Number(age), height })
+
+    }
+
+
+    render() {
+        // console.log('state',this.state)
+        return (
+            <div>
+
+
+                <input
+                    className="name-input"
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                />
+                <input
+                    className="age-input"
+                    type="number"
+                    name="age"
+                    value={this.state.age}
+                    onChange={this.handleChange}
+                />
+                <input
+                    className="height-input"
+                    type="text"
+                    name="height"
+                    value={this.state.height}
+                    onChange={this.handleChange}
+                />
+                <button onClick={this.updateSmurf}>Update Smurf</button>
+                {this.props.error ? <p>Error!</p> : null}
+            </div>
+        )
+    }
+}
+const mapStateToProps = state => {
+    return {
+        error: state.error
     };
-
-
-
-
-
-
-
-    return (
-        <div>
-            {!isFetching ? (
-                <h1 onClick={() => setIsFetching(true)}>
-                    {props.name}{' '}
-                </h1>
-            ) : (
-                    <div>
-                        <input
-                            className="name-input"
-                            type="text"
-                            name="updateSmurf"
-                            value={updateSmurf}
-                            onChange={handleChanges}
-                        />
-                        <button onClick={updateSmurf}>Update Smurf</button>
-                    </div>
-                )}
-        </div>
-    );
 };
 
 
-export default connect(null, { addNewSmurf })(SmurfForm);
+
+export default connect(mapStateToProps, { addNewSmurf })(SmurfForm);
 
 
